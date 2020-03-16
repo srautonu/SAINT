@@ -56,7 +56,7 @@ public class Main {
 
                 Logger.Log("Preparing request for " + protein.getId() + " ...");
                 strJobId = predictor.submitJob(protein.getId(), protein.getSequence());
-                Logger.Log("Job Id for " + protein.getId() + "is " + strJobId);
+                Logger.Log("Job Id for " + protein.getId() + " is " + strJobId);
                 protein.setJobId(strJobId);
                 pending++;
 
@@ -78,6 +78,7 @@ public class Main {
 
         pending = 1;
         while (pending > 0) {
+            Logger.Log("Pending = " + pending);
 
             Logger.Log("Going to sleep for 10 minutes ...");
             Thread.sleep(10 * 60 * 1000);
