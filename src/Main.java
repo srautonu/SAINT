@@ -71,12 +71,6 @@ public class Main {
             expBackOffMinutes *= 2;
         }
 
-//        lst_Protein.clear();
-//        Protein singleProt = new Protein("Test", "SEQUENCE");
-//        singleProt.setJobId("749cdd02-b444-452a-b11a-2659aea67cbb");
-//        lst_Protein.add(singleProt);
-
-        pending = 1;
         while (pending > 0) {
 
             Logger.Log("Going to sleep for 10 minutes ...");
