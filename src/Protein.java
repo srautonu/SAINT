@@ -2,9 +2,14 @@ class Protein {
     String id;
     String sequence;
     String jobId;
-    String structure_3C;
-    String structure_8C;
     boolean jobCompleted;
+    
+    public Protein() {
+        setId("");
+        setSequence("");
+        setJobId("");
+        setJobCompleted(false);
+    }
 
     public Protein(String strId, String strSequence) {
         setId(strId);
@@ -43,21 +48,5 @@ class Protein {
 
     public void setJobCompleted(boolean jobCompleted) {
         this.jobCompleted = jobCompleted;
-    }
-
-    public String getStructure_3C() {
-        return structure_3C;
-    }
-
-    public void setStructure_3C(String structure_3C) {
-        this.structure_3C = structure_3C;
-    }
-
-    public String getStructure_8C() {
-        return structure_8C;
-    }
-
-    public void setStructure_8C(String structure_8C) {
-        this.structure_8C = structure_8C;
     }
 }

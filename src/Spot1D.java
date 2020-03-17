@@ -55,6 +55,7 @@ public class Spot1D {
                     "Content-Disposition: form-data; name=\"" + prop.getKey() + "\"\r\n\r\n" +
                     prop.getValue() + "\r\n";
         }
+        strPayload += "\r\n------" + strSeperator + "--\r\n";
 
         OutputStream os = conn.getOutputStream();
         os.write(strPayload.getBytes());
