@@ -17,8 +17,9 @@ public class RetrieveSSPred {
             while  (null != (strInputLine = readerCSV.readLine())){
                 String[] strSplits = strInputLine.split(",");
                 Protein protein = new Protein();
-                protein.setId( strSplits[0]);
-                protein.setJobId( strSplits[1]);
+                protein.setId(strSplits[0]);
+                protein.setJobId(strSplits[1]);
+                protein.setJobCompleted(0 == strSplits[2].compareToIgnoreCase("completed"));
                 lst_Protein.add(protein);
             }
         } catch (IOException e) {
@@ -53,6 +54,13 @@ public class RetrieveSSPred {
         List<Protein> lst_Protein = getProteinJobs(strFile);
         
         pending = lst_Protein.size();
+         for (Protein protein : lst_Protein) {
+             if (protein.isJobCompleted()) {
+                  Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + " was already completed.");
+                 pending--;
+             }
+         }
+         
         while (pending > 0) {
             Logger.Log("Pending = " + pending);            
             try {
