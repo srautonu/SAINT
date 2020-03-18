@@ -25,9 +25,8 @@ public class ScheduleSSPred {
     }
 
     public static void main(String[] args) throws Exception {
-        String strHost = "api.sparks-lab.org";
         String strFile = "";
-        Spot1D predictor = null;
+        NetSurfP predictor = null;
         int pending = 0;
         int expBackOffSeconds = 5;
 
@@ -46,7 +45,7 @@ public class ScheduleSSPred {
             System.setProperty("https.proxyPort", "8888");
         }
 
-        predictor = new Spot1D(strHost);
+        predictor = new NetSurfP();
         List<Protein> lst_Protein = getProteinSequences(strFile);
 
         for (Protein protein : lst_Protein) {
@@ -67,6 +66,7 @@ public class ScheduleSSPred {
                 } catch (Exception e) {
                     Logger.Log(e);
                     expBackOffSeconds *= 2;
+                    done = false;
                 } finally {
                     Logger.Log("Going to sleep for " + expBackOffSeconds + " seconds  ...");
                     Thread.sleep(expBackOffSeconds * 1000);                    

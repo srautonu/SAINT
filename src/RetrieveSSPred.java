@@ -29,11 +29,9 @@ public class RetrieveSSPred {
     }
 
     public static void main(String[] args) throws Exception {
-        String strHost = "api.sparks-lab.org";
         String strFile = "";
-        Spot1D predictor = null;
+        NetSurfP predictor = null;
         int pending = 0;
-        int expBackOffSeconds = 5;
 
         if (args.length < 1) {
             Logger.Log("Usage: java Main JobIdMapFile");
@@ -50,7 +48,7 @@ public class RetrieveSSPred {
             System.setProperty("https.proxyPort", "8888");
         }
 
-        predictor = new Spot1D(strHost);
+        predictor = new NetSurfP();
         List<Protein> lst_Protein = getProteinJobs(strFile);
         
         pending = lst_Protein.size();
@@ -76,8 +74,8 @@ public class RetrieveSSPred {
 
                         predictor.saveStructure(protein.getId(), protein.getJobId());
                         Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + "SS downloaded.");
-                        predictor.saveContactMap(protein.getId(), protein.getJobId());
-                        Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + "SCON downloaded.");
+                        //predictor.saveContactMap(protein.getId(), protein.getJobId());
+                        //Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + "SCON downloaded.");
                     } else {
                         Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + " pending.");
                     }
@@ -86,6 +84,7 @@ public class RetrieveSSPred {
                 Logger.Log(e);
             }
             
+            Logger.Log("Pending = " + pending);            
             Logger.Log("Going to sleep for 10 minutes ...");
             Thread.sleep(10 * 60 * 1000);
 
