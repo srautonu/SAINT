@@ -30,14 +30,15 @@ public class RetrieveSSPred {
 
     public static void main(String[] args) throws Exception {
         String strFile = "";
-        NetSurfP predictor = null;
+        SSPredServer predictor = null;
         int pending = 0;
 
-        if (args.length < 1) {
-            Logger.Log("Usage: java Main JobIdMapFile");
-            Logger.Log("E.g. : java Main Scheduled_CASP12.csv");
+        if (args.length < 2) {
+            Logger.Log("Usage: java Main spot1d/netsurfp JobIdMapFile");
+            Logger.Log("E.g. : java Main netsurfp Scheduled_CASP12.csv");
             System.exit(1);
         }
+        predictor = SSPredServerFactory.getSSPredServer(args[0]);
         strFile = args[0];
 
         if (ENABLE_FIDDLER_DEBUGGING) {
@@ -74,8 +75,13 @@ public class RetrieveSSPred {
 
                         predictor.saveStructure(protein.getId(), protein.getJobId());
                         Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + "SS downloaded.");
-                        //predictor.saveContactMap(protein.getId(), protein.getJobId());
-                        //Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + "SCON downloaded.");
+                        
+                        try {
+                            predictor.saveContactMap(protein.getId(), protein.getJobId());
+                            Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + "SCON downloaded.");
+                        } catch (UnsupportedOperationException e) {
+                            
+                        }
                     } else {
                         Logger.Log("Protein " + protein.getId() + ", Job Id: " + protein.getJobId() + " pending.");
                     }

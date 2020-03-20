@@ -26,16 +26,18 @@ public class ScheduleSSPred {
 
     public static void main(String[] args) throws Exception {
         String strFile = "";
-        NetSurfP predictor = null;
+        SSPredServer predictor = null;
         int pending = 0;
         int expBackOffSeconds = 5;
 
-        if (args.length < 1) {
-            Logger.Log("Usage: java Main CSV_File");
-            Logger.Log("E.g. : java Main casp10domainfasta.csv");
+        if (args.length < 2) {
+            Logger.Log("Usage: java Main spot1d/netsurfp CSV_File");
+            Logger.Log("E.g. : java Main spot1d casp10domainfasta.csv");
             System.exit(1);
         }
-        strFile = args[0];
+        
+        predictor = SSPredServerFactory.getSSPredServer(args[0]);
+        strFile = args[1];
 
         if (ENABLE_FIDDLER_DEBUGGING) {
             // Enable Fiddler debugging:
@@ -45,9 +47,7 @@ public class ScheduleSSPred {
             System.setProperty("https.proxyPort", "8888");
         }
 
-        predictor = new NetSurfP();
         List<Protein> lst_Protein = getProteinSequences(strFile);
-
         for (Protein protein : lst_Protein) {
             boolean done;
             // Keep trying the same protein, until we are successful.

@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NetSurfP {
+public class NetSurfP implements SSPredServer {
     private static final String c_strJobSubmissionPage = "cgi-bin/webface2.fcgi"; // POST   
     private static final String c_strJobResultPage = "cgi-bin/webface2.fcgi?jobid={0}&wait=20"; // GET
     private static final String c_strStructurePage = "services/NetSurfP-2.0/tmp/{0}/{0}.csv"; // GET
@@ -119,7 +119,7 @@ public class NetSurfP {
     }
 
     public void saveContactMap(String strProtId, String strJobId) throws Exception {
-        // Not implemented.
+        throw new UnsupportedOperationException("Contact map is not available from this server.");
     }
 
     private void DownloadAndSaveStructure(

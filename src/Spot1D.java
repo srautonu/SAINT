@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Spot1D {
+public class Spot1D implements SSPredServer {
     private static final String c_strJobSubmissionPage = "upload"; // POST
     private static final String c_strJobResultPage = "jobs/{0}/result.html"; // GET
     private static final String c_strStructurePage = "jobs/{0}/spot1d.tgz"; // GET
