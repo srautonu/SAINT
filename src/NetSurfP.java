@@ -73,7 +73,10 @@ public class NetSurfP {
             }
         }
         conn.disconnect();
-
+        
+        if (strJobId.isEmpty()) {
+            throw new RuntimeException("Failed : No job id.");
+        }
         return strJobId;
     }
 

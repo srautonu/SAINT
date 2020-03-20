@@ -49,7 +49,7 @@ public class ScheduleSSPred {
         List<Protein> lst_Protein = getProteinSequences(strFile);
 
         for (Protein protein : lst_Protein) {
-            boolean done = true;
+            boolean done;
             // Keep trying the same protein, until we are successful.
             do {
                 try {
@@ -60,6 +60,7 @@ public class ScheduleSSPred {
                     Logger.Log("Job Id for " + protein.getId() + " is " + strJobId);
                     protein.setJobId(strJobId);
                     pending++;
+                    done = true;
 
                     // Reduce back off time.
                     expBackOffSeconds = Math.max(5, expBackOffSeconds/2);

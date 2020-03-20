@@ -22,11 +22,14 @@ public class LogToListConverter {
                  break;
              
              int i = strLine.indexOf("Job Id for");
+             if (-1 == i)
+                 continue;
+             
              int j = strLine.indexOf("is");
              
              strId = strLine.substring(i + 11, j - 1).trim();
              strJobId = strLine.substring(j + 2).trim();
-             System.out.println(strId + "," + strJobId);           
+             System.out.println(strId + "," + strJobId + ",pending");           
          }
     }
 }
