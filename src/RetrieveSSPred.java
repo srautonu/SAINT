@@ -39,7 +39,7 @@ public class RetrieveSSPred {
             System.exit(1);
         }
         predictor = SSPredServerFactory.getSSPredServer(args[0]);
-        strFile = args[0];
+        strFile = args[1];
 
         if (ENABLE_FIDDLER_DEBUGGING) {
             // Enable Fiddler debugging:
